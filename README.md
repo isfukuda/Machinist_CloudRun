@@ -16,13 +16,16 @@
 * 参考: [Nginxのログをdatacounterで集計する方法](https://qiita.com/snagasawa_/items/a2d7ff9d21d535f1f8bb)
 * [gcloud cli](https://cloud.google.com/sdk?hl=JA)を使えるようしておく
 ## CloudRunでMachinistのチャートを表示させる
-*やることは大きく２つ
-1.nginxを機動、アクセスログを集計、Machinistへ投げ込む
-2.Serverlessコンテナ基盤であるCloudRunへ軽量nginxコンテナをデプロイ
+* やることは大きく２つ
+  ```
+  1.nginxを機動、アクセスログを集計、Machinistへ投げ込む
+  2.Serverlessコンテナ基盤であるCloudRunへ軽量nginxコンテナをデプロイ
+  ```
 ### 0.仕込み
 * nginx access.logをDatacounter Pluginで集計する
-* fluent-plugin-machinist経由でデータを投入する
-* Machinistでチャートを作り、画面を共有する設定をすませる
+* Machinistでデータを受け取る為のAPI key発行をしておく
+* fluent-plugin-machinist経由でデータを投げ込む
+* Machinistでチャートを作り、画面共有する設定すませる
 ### 1.コンテナ作成準備
 * gcloudコマンドが使える環境へ各種ファイルを取得する
   ```
