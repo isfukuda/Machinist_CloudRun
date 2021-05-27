@@ -2,16 +2,18 @@
 - nginx access.logのStatus Code別のカウントおよびレートをお手軽に描画して表示させるまでを詳解
 - 参考画像 -> https://github.com/isfukuda/Machinist_CloudRun/blob/main/machinist.png
 ## 使うもの一覧
-* [IIJ Machinist](https://machinist.iij.jp/#/)
-* [CloudRun](https://cloud.google.com/run)
+* [IIJ Machinist](https://machinist.iij.jp/#/) ... メトリクス収集/描画
+* [GCP CloudRun](https://cloud.google.com/run) ... Serverlessコンテナ基盤
 * [nginx](https://www.nginx.co.jp/blog/deploying-nginx-nginx-plus-docker/)
 * [fluentd](https://www.fluentd.org/architecture)
-* [fluent-plugin-datacounter](https://github.com/tagomoris/fluent-plugin-datacounter)
-* [fluent-plugin-machinist](https://github.com/iij/fluent-plugin-machinist)
-## SignUP, Google Cloud Platform and IIJ Machinist 
+  * [fluent-plugin-datacounter](https://github.com/tagomoris/fluent-plugin-datacounter)
+  * [fluent-plugin-machinist](https://github.com/iij/fluent-plugin-machinist)
+## 事前準備
+* GCP, Machinist いずれも無料枠OK
+### SignUP, Google Cloud Platform and IIJ Machinist 
 * https://cloud.google.com/free/?hl=ja 
 * https://app.machinist.iij.jp/sign-up
-## Install, setup
+### Install, setup
 * [fluentd install](https://docs.fluentd.org/installation)
 * Machinistの利用方法は[こちら](https://machinist.iij.jp/getting-started/)
 * 参考: [Nginxのログをdatacounterで集計する方法](https://qiita.com/snagasawa_/items/a2d7ff9d21d535f1f8bb)
