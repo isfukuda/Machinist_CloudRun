@@ -1,7 +1,7 @@
 # MachinistとCloudRunをつなげてみる
 - nginx access.logのStatus Code別のカウントおよびレートをお手軽に描画して表示させるまでを詳解
 ## 使うもの一覧
-* [IIJ Machinist](https://machinist.iij.jp/#/)でメトリクスを描画、描画したグラフをページにはめ込む
+* [IIJ Machinist](https://machinist.iij.jp/#/)
 * [CloudRun](https://cloud.google.com/run)
 * [nginx](https://www.nginx.co.jp/blog/deploying-nginx-nginx-plus-docker/)
 * [fluentd](https://www.fluentd.org/architecture)
@@ -16,7 +16,13 @@
 * 参考: [Nginxのログをdatacounterで集計する方法](https://qiita.com/snagasawa_/items/a2d7ff9d21d535f1f8bb)
 * [gcloud cli](https://cloud.google.com/sdk?hl=JA)を使えるようしておく
 ## CloudRunでMachinistのチャートを表示させる
-- 
+*やることは大きく２つ
+1.nginxを機動、アクセスログを集計、Machinistへ投げ込む
+2.Serverlessコンテナ基盤であるCloudRunへ軽量nginxコンテナをデプロイ
+### 0.仕込み
+* nginx access.logをDatacounter Pluginで集計する
+* fluent-plugin-machinist経由でデータを投入する
+* Machinistでチャートを作り、画面を共有する設定をすませる
 ### 1.コンテナ作成準備
 * gcloudコマンドが使える環境へ各種ファイルを取得する
   ```
@@ -38,8 +44,8 @@
    <iframe src="https://app.machinist.iij.jp/embed/chart/XXXXXXXXXX?toolbar=false&legend=true&datatable=false&theme=Light&type=lineChart&period=raw&to=&reload=true" frameborder="0" scrolling="no" width="800px" height="300px"></iframe>
   $ 
   ```
-### 4.コンテナをbuild, push, run
-* build実行、STSTUS/SUCCESSで終わる事
+### 4.カスタムコンテナ作り / build,push amd run
+* build実行、STSTUS/SUCCESSで終わる事!
   ```
   $ gcloud builds submit --tag gcr.io/<YOUR Project ID>/machinist
    ```
