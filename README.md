@@ -1,5 +1,6 @@
 # MachinistとCloudRunをつなげてみる
 - nginx access.logのStatus Code別のカウントおよびレートをお手軽に描画して表示させるまでを詳解
+- 参考画像 -> https://github.com/isfukuda/Machinist_CloudRun/blob/main/machinist.png
 ## 使うもの一覧
 * [IIJ Machinist](https://machinist.iij.jp/#/)
 * [CloudRun](https://cloud.google.com/run)
