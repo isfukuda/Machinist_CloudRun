@@ -1,5 +1,5 @@
 # MachinistとCloudRunをつなげてみる
-- nginx access.logのStatus Code別のカウントおよびレートをお手軽に描画して表示させるまでを詳解
+- nginx access.logのStatus Code別のカウントおよびレートをお手軽に描画(Machinist)して表示(CloudRun)させるまでを詳解
 - 参考画像 -> https://github.com/isfukuda/Machinist_CloudRun/blob/main/machinist.png
 ## 使うもの一覧
 * [IIJ Machinist](https://machinist.iij.jp/#/) ... メトリクス収集/描画
@@ -9,7 +9,7 @@
   * [fluent-plugin-datacounter](https://github.com/tagomoris/fluent-plugin-datacounter)
   * [fluent-plugin-machinist](https://github.com/iij/fluent-plugin-machinist)
 ## 事前準備
-* GCP, Machinist いずれも無料枠OK
+* GCP, Machinist いずれも無料枠でOK
 ### SignUP, Google Cloud Platform and IIJ Machinist 
 * https://cloud.google.com/free/?hl=ja 
 * https://app.machinist.iij.jp/sign-up
@@ -21,14 +21,14 @@
 ## CloudRunでMachinistのチャートを表示させる
 * やることは大きく２つ
   ```
-  1.nginxを機動、アクセスログを集計、Machinistへ投げ込む
+  1.nginxを機動、アクセスログを集計・加工しMachinistへ投げ込む
   2.Serverlessコンテナ基盤であるCloudRunへ軽量nginxコンテナをデプロイ
   ```
 ### 0.仕込み
 * nginx access.logをDatacounter Pluginで集計する
 * Machinistでデータを受け取る為のAPI key発行をしておく
 * fluent-plugin-machinist経由でデータを投げ込む
-* Machinistでチャートを作り、画面共有する設定すませる
+* Machinistでチャートを作り、画面共有設定を済ませておく
 ### 1.コンテナ作成準備
 * gcloudコマンドが使える環境へ各種ファイルを取得する
   ```
@@ -57,7 +57,7 @@
    ```
 * CloudRun実行
   ```
-  $ gcloud beta run deploy --image gcr.io/XXXXXX/machinist
+  $ gcloud beta run deploy --image gcr.io<YOUR Project ID>//machinist
   Please choose a target platform:
    [1] Cloud Run (fully managed)
    [2] Cloud Run for Anthos deployed on Google Cloud
@@ -69,7 +69,7 @@
 
   To make this the default region, run `gcloud config set run/region asia-northeast1`.
   
-  Deploying container to Cloud Run service [machinist] in project [XXXXXXX] region [asia-northeast1]
+  Deploying container to Cloud Run service [machinist] in project <YOUR Project ID>[] region [asia-northeast1]
   ✓ Deploying... Done.                                                           
   ✓ Creating Revision...                                                       
   ✓ Routing traffic...                                                         
@@ -79,7 +79,7 @@
   
   To make this the default region, run `gcloud config set run/region asia-northeast1`.
   
-  Deploying container to Cloud Run service [machinist] in project [XXXXXXXX] region [asia-northeast1]  
+  Deploying container to Cloud Run service [machinist] in project [<YOUR Project ID>] region [asia-northeast1]  
   ✓ Deploying... Done.                                                           
   ✓ Creating Revision...                                                       
   ✓ Routing traffic...                                                         
